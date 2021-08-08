@@ -1,0 +1,28 @@
+.nav{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+.nav-item{
+  padding:1em;
+  cursor: pointer;
+}
+
+.nav-item:hover{
+  color:white;
+  background:#3f51b5;
+}
+
+.nav-active{
+  color:white;
+  background:#3f51b5;
+}
+
+.main{
+  padding: 1em;
+}

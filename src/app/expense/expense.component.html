@@ -1,0 +1,78 @@
+<div class="btns-widget">
+  <button mat-raised-button color="primary" (click)="add()">Add Expense</button>
+  <button mat-raised-button color="primary" (click)="save()">save</button>
+
+</div>
+<table mat-table [dataSource]="expenseData" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="fullName">
+    <th mat-header-cell *matHeaderCellDef> Full Name </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.isEditable ">
+      <mat-form-field class="example-full-width">
+        <!-- <mat-label>User Full Name</mat-label> -->
+        <mat-select required [(ngModel)] = "element.uid" (selectionChange) = setFullName(element)>
+          <mat-option *ngFor="let user of usernamesDropdown" [value]="user.uid">
+            {{user.fullName}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Required field</mat-error>
+      </mat-form-field>
+
+    </div>
+    <div *ngIf=" !element.isEditable ">
+      {{userList[element['uid']]['fullName']}}
+    </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef> Category </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.isEditable ">
+      <mat-form-field class="example-full-width">
+        <!-- <mat-label>User Full Name</mat-label> -->
+        <mat-select required [(ngModel)] = "element.category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Required field</mat-error>
+      </mat-form-field>
+
+    </div>
+    <div *ngIf=" !element.isEditable ">
+      {{element.category}}
+    </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cost" >
+    <th mat-header-cell *matHeaderCellDef> Cost </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.isEditable">
+      <mat-form-field class="example-full-width" >
+        <input matInput [(ngModel)] = "element.cost"  required type="number">
+        <mat-error>Required field</mat-error>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!element.isEditable ">
+      {{element.cost}}
+    </div>
+    </td>
+  </ng-container>
+
+ <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Edit/Delete </th>
+    <td mat-cell *matCellDef="let element" class="">
+      <i class="fas fa-edit" *ngIf="!element.isEditable" (click)="editExpense(element)"></i>
+      <i class="fas fa-trash" (click)="deleteExpense(element)" ></i>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div>
+</div>
